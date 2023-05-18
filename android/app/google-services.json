@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "438899273342",
+    "project_id": "flutter-mechanic-app",
+    "storage_bucket": "flutter-mechanic-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438899273342:android:bc40e4b0c696e306c0322f",
+        "android_client_info": {
+          "package_name": "com.mechanic.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438899273342-5trmsa3acman660bjalvt8hj0rvu29q6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq1tSoGUm9RG0eTPoLGIjwA-YgL9vIWtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438899273342-5trmsa3acman660bjalvt8hj0rvu29q6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
