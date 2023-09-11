@@ -1,3 +1,4 @@
+
 import 'package:flutter_mechanic_app_fyp/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,7 @@ class _FeedBackReportDetailScreenState extends State<FeedBackReportDetailScreen>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Patient Name ',
+                          'User Name ',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -105,7 +106,7 @@ class _FeedBackReportDetailScreenState extends State<FeedBackReportDetailScreen>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Patient Email',
+                          'User Email',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,

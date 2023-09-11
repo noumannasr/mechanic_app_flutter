@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mechanic_app_fyp/constants.dart';
 import 'package:flutter_mechanic_app_fyp/screen/detail/service_detail_screen.dart';
+import 'package:flutter_mechanic_app_fyp/screen/feedbackReport/feedback_report_screen.dart';
 
 class MyServicesUserScreen extends StatefulWidget {
   const MyServicesUserScreen({Key? key}) : super(key: key);
@@ -81,6 +82,7 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
                                         mechanicName: snapshot.data!.docs[index]["mechanicName"].toString() ,
                                         serviceName: snapshot.data!.docs[index]["ServiceName"].toString(),
@@ -239,8 +241,95 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                               ),
 
                                               SizedBox(
+                                                height: size.height*0.01,
+                                              ),
+
+
+                                              Container(
+
+                                                width: size.width*0.55,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Feedback',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 8),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.green,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Feedback"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Report',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 0),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.red,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Report"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+
+
+                                                  ],),
+                                              ),
+
+                                              SizedBox(
                                                 height: size.height*0.02,
                                               ),
+
+
+
                                             ],),
                                         ),
                                       ],
@@ -287,6 +376,7 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
                                         mechanicName: snapshot.data!.docs[index]["mechanicName"].toString() ,
                                         serviceName: snapshot.data!.docs[index]["ServiceName"].toString(),
@@ -451,6 +541,90 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                               SizedBox(
                                                 height: size.height*0.02,
                                               ),
+
+                                              Container(
+
+                                                width: size.width*0.55,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Feedback',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 8),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.green,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Feedback"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Report',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 0),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.red,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Report"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+
+
+                                                  ],),
+                                              ),
+
+                                              SizedBox(
+                                                height: size.height*0.02,
+                                              ),
+
                                             ],),
                                         ),
                                       ],
@@ -497,6 +671,7 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
                                         mechanicName: snapshot.data!.docs[index]["mechanicName"].toString() ,
                                         serviceName: snapshot.data!.docs[index]["ServiceName"].toString(),
@@ -664,7 +839,90 @@ class _MyServicesUserScreenState extends State<MyServicesUserScreen> {
                                               SizedBox(
                                                 height: size.height*0.02,
                                               ),
-                                            ],),
+                                              Container(
+
+                                                width: size.width*0.55,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Feedback',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 8),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.green,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Feedback"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (c, a1, a2) => FeedbackReportScreen(title: 'Report',
+                                                              mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
+                                                              mechanicName: snapshot.data!.docs[index]["mechanicName"].toString(),
+                                                            ),
+                                                            transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                                                            transitionDuration: Duration(milliseconds: 100),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 0),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(0),
+                                                            color: Colors.red,
+                                                          ),
+                                                          width: size.width*0.24,
+                                                          alignment: Alignment.center,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 8,right: 8),
+                                                            child: Text(
+                                                              "Report"
+
+                                                              , style: TextStyle(
+                                                                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500, height: 1.3),),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+
+
+                                                  ],),
+                                              ),
+
+                                              SizedBox(
+                                                height: size.height*0.02,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

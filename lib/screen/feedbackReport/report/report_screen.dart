@@ -1,18 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_mechanic_app_fyp/constants.dart';
-import 'package:flutter_mechanic_app_fyp/screen/feedbackReportDetail/feedback_report_detail_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:counseling_app_flutter/constants.dart';
+// import 'package:counseling_app_flutter/screen/doctor/feedbackReportDetail/feedback_report_detail_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({Key? key}) : super(key: key);
+class ReportScreen extends StatefulWidget {
+  const ReportScreen({Key? key}) : super(key: key);
 
   @override
-  _FeedbackScreenState createState() => _FeedbackScreenState();
+  _ReportScreenState createState() => _ReportScreenState();
 }
 
-class _FeedbackScreenState extends State<FeedbackScreen> {
+class _ReportScreenState extends State<ReportScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,7 +25,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         elevation: 0,
         backgroundColor: appBarColor,
         title: Text(
-          'Feedback',
+          'Report',
           style: TextStyle(
               fontSize: 19, fontWeight: FontWeight.w600, color: Colors.white),
         ),
@@ -31,7 +33,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       ),
 
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Feedback').where('doctorId',isEqualTo: _auth.currentUser!.uid.toString()).snapshots(),
+        stream: FirebaseFirestore.instance.collection('Report').where('doctorId',isEqualTo: _auth.currentUser!.uid.toString()).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -173,7 +175,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                                               //   context,
                                               //   MaterialPageRoute(builder: (context) => FeedBackReportDetailScreen(
                                               //     paitentName: snapshot.data!.docs[index]["name"].toString(),
-                                              //     screenTitle: "Feedback",
+                                              //     screenTitle: "Report",
                                               //     patientEmail: snapshot.data!.docs[index]["email"].toString(),
                                               //     title: snapshot.data!.docs[index]["title"].toString(),
                                               //     description: snapshot.data!.docs[index]["description"].toString(),

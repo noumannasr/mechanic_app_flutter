@@ -362,7 +362,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Patient Name ',
+                        'User Name ',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -389,7 +389,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Patient Email ',
+                        'User Email ',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

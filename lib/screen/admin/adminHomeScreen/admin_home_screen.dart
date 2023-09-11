@@ -9,6 +9,7 @@ import 'package:flutter_mechanic_app_fyp/model/firebase_auth.dart';
 import 'package:flutter_mechanic_app_fyp/screen/admin/adminAppointments/admin_appointments_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/admin/adminUsersScreen/admin_users_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/auth/userType/usertype_screen.dart';
+import 'package:flutter_mechanic_app_fyp/screen/feedbackReport/view_feedback_report_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -79,6 +80,17 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       quantity: '330g',
       ruppes: 'AED3.81',
       image: 'assets/images/feedback.png',
+      favorite: false,
+    ),
+    Product(
+      title: 'Report',
+      addToCart: 0,
+      sale: 'Sale',
+      isNew: '',
+      id: '',
+      quantity: '330g',
+      ruppes: 'AED3.81',
+      image: 'assets/images/report.png',
       favorite: false,
     ),
 
@@ -237,6 +249,45 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 
                                       });
                                     }
+                                    else if (index1 == 2) {
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (c, a1, a2) => FeedbackreportScreen(title: 'Feedback',type: 'Admin'),
+                                          transitionsBuilder: (c, anim, a2, child) =>
+                                              FadeTransition(
+                                                  opacity: anim, child: child),
+                                          transitionDuration: Duration(
+                                              milliseconds: 100),
+                                        ),
+                                      ).then((value) {
+                                        getData();
+                                        setState(() {
+
+                                        });
+
+                                      });
+                                    }
+                                    else if (index1 == 3) {
+
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (c, a1, a2) => FeedbackreportScreen(title: 'Report', type: 'Admin',),
+                                          transitionsBuilder: (c, anim, a2, child) =>
+                                              FadeTransition(
+                                                  opacity: anim, child: child),
+                                          transitionDuration: Duration(
+                                              milliseconds: 100),
+                                        ),
+                                      ).then((value) {
+                                        getData();
+                                        setState(() {
+
+                                        });
+
+                                      });
+                                    }
                                     else if(index1 == 1) {
                                       Navigator.push(
                                         context,
@@ -256,7 +307,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 
                                       });
                                     }
-                                    else if(index1 == 3) {
+                                    else if(index1 == 4) {
                                       SharedPreferences prefs = await SharedPreferences.getInstance();
                                       try {
                                         prefs.remove('userEmail');
@@ -287,6 +338,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                           index1 == 0 ? <Color>[twoColor1, twoColor,] :
                                           index1 == 1 ? <Color>[threeColor1, threeColor,] :
                                           index1 == 2 ? <Color>[fourColor1, fourColor,] :
+                                          index1 == 3 ? <Color>[darkPeachColor, darkPeachColor,] :
                                           <Color>[oneColor1, oneColor],
                                         ),
                                         boxShadow: [
@@ -321,7 +373,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                           SizedBox(
                                             height: size.height * 0.01,
                                           ),
-                                          index1 == 2 || index1 == 3 ? Container() :
+                                          index1 == 2 || index1 == 3 || index1 == 4 ? Container() :
                                           Center(
                                             child: Container(
                                               decoration: BoxDecoration(

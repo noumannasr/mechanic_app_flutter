@@ -38,7 +38,7 @@ const lightGreyColor = Color(0xfff6f6f6);
 const secondaryColor = Color(0xffaddfb9);
 const secondary2Color = Color(0xff00BF62);//Color(0xff033f7c);
 const secondary3Color = Color(0xff00BF62);//Color(0xff4565ba);
-const appBarColor = Color(0xff00BF62);//Color(0xff1564c0);
+const appBarColor = Color(0xff02bfe5);//Color(0xff1564c0);
 
 const greyColor = Color(0xffB4C2CD);
 const greyColor1 = Color(0xffDEDEDE);

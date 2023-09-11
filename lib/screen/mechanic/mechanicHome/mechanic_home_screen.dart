@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mechanic_app_fyp/constants.dart';
 import 'package:flutter_mechanic_app_fyp/screen/auth/login/login_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/auth/userType/usertype_screen.dart';
+import 'package:flutter_mechanic_app_fyp/screen/feedbackReport/view_feedback_report_screen.dart';
+import 'package:flutter_mechanic_app_fyp/screen/mechanic/employes/view_employe_screen.dart';
+import 'package:flutter_mechanic_app_fyp/screen/mechanic/garageLocation/garage_location_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/mechanic/mechanicServices/service_request_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/mechanic/mechanicServices/view_my_services_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +24,7 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
   String name = '' , email = '',uid = '',userType = '', status = '';
   String text = '';
   int current = 0;
+  double lat = 0, long =0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,6 +33,8 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
         status = value.docs[0]['status'];
         name = value.docs[0]['name'];
         email = value.docs[0]['email'];
+        lat = value.docs[0]['lat'];
+        long = value.docs[0]['long'];
 
       });
     });
@@ -38,11 +44,6 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
       email = prefs.getString('userEmail')!;
       uid = prefs.getString('userId')!;
     });
-
-
-
-
-
   }
 
   @override
@@ -393,9 +394,14 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
 
                       onPressed: () async {
 
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ViewEmployeeScreen()
+                          ),
+                        );
 
 
-                      }, child: Text('Add Employee', style: buttonStyle)),
+                      }, child: Text('Employees', style: buttonStyle)),
                 ),
               ),
               SizedBox(
@@ -540,7 +546,23 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
 
                       onPressed: () async {
 
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (c, a1, a2) => FeedbackreportScreen(title: 'Feedback', type: 'M',),
+                            transitionsBuilder: (c, anim, a2, child) =>
+                                FadeTransition(
+                                    opacity: anim, child: child),
+                            transitionDuration: Duration(
+                                milliseconds: 100),
+                          ),
+                        ).then((value) {
+                          getData();
+                          setState(() {
 
+                          });
+
+                        });
 
                       }, child: Text('View Feedback', style: buttonStyle)),
                 ),
@@ -549,6 +571,7 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
               SizedBox(
                 height: size.height*0.02,
               ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 16,right: 16),
                 child: Container(
@@ -587,7 +610,78 @@ class _MechanicHomeScreenState extends State<MechanicHomeScreen> {
 
                       onPressed: () async {
 
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (c, a1, a2) => FeedbackreportScreen(title: 'Report',type: 'M'),
+                            transitionsBuilder: (c, anim, a2, child) =>
+                                FadeTransition(
+                                    opacity: anim, child: child),
+                            transitionDuration: Duration(
+                                milliseconds: 100),
+                          ),
+                        ).then((value) {
+                          getData();
+                          setState(() {
 
+                          });
+
+                        });
+
+                      }, child: Text('View Report', style: buttonStyle)),
+                ),
+              ),
+
+              SizedBox(
+                height: size.height*0.02,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 16,right: 16),
+                child: Container(
+
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+                    ],
+                    border: Border.all(color: Colors.white.withOpacity(0.5)),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.0, 1.0],
+                      colors: [
+                        buttonColor,
+                        buttonColor,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        minimumSize: MaterialStateProperty.all(Size(size.width, 50)),
+                        backgroundColor:
+                        MaterialStateProperty.all(buttonColor),
+                        // elevation: MaterialStateProperty.all(3),
+                        shadowColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                      ),
+
+                      onPressed: () async {
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => GarageLocationScreen(
+                            lat: lat,
+                            long: long,
+                          )
+                          ),
+                        );
 
                       }, child: Text('View Garage Location', style: buttonStyle)),
                 ),

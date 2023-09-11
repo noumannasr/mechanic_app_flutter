@@ -75,14 +75,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     print('Starting usertype');
-
     // TODO: implement initState
-    // setState(() {
-    //   userType = '';
-    //   email = '';
-    //   uid = '';
-    // });
-
     super.initState();
     getData();
   }

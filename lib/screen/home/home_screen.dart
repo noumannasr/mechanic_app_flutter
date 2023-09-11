@@ -443,6 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   MaterialPageRoute(builder: (context) => ViewUserServicesScreen(
                                     mechanicId: snapshot.data!.docs[index]["uid"].toString(),
                                     mechanicName: snapshot.data!.docs[index]["name"].toString(),
+                                    mechanicPhone: snapshot.data!.docs[index]["phone"].toString(),
                                   )),
                                 );
                               },
@@ -490,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                             width: size.width*0.55,
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 8,top: 8),
@@ -499,30 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     , style: TextStyle(
                                                       color: Colors.black, fontSize: 14, fontWeight: FontWeight.w800, height: 1.3),),
                                                 ),
-                                                Container(
-                                                  child: Row(
-                                                    children: [
-                                                      GestureDetector(
-                                                          onTap:() {
 
-                                                          },
-                                                          child: Icon(Icons.star, size: 25,color: Colors.amber,)),
-                                                      SizedBox(width: 5,),
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 0),
-                                                        child: Text(
-                                                          '4.5',
-                                                          style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 15,
-                                                              fontWeight: FontWeight.w700),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 10,),
-
-                                                    ],
-                                                  ),
-                                                ),
 
                                                 // Icon(Icons.favorite, color:greyColor,size: 20,)
 

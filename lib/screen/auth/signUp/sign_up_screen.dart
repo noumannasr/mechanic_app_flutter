@@ -563,6 +563,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // git branch -M main
                     // git remote add origin https://github.com/junaid4jd/flutter_mechanic_app_fyp.git
                     // git push -u origin main
+                    // git push -f origin main
 
                     _isLoading
                         ? CircularProgressIndicator(
@@ -609,14 +610,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             onPressed: () async {
 
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   PageRouteBuilder(
-                              //     pageBuilder: (c, a1, a2) => HomeScreen(),
-                              //     transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                              //     transitionDuration: Duration(milliseconds: 100),
-                              //   ),
-                              // );
+
 
                               if (_inputValidator.validateName(
                                   _firstNameControoler.text) !=
@@ -624,21 +618,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   _firstNameControoler.text.isNotEmpty) {
                                 Fluttertoast.showToast(
                                     msg: "Invalid User Name",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.black,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );
-                              }
-
-                              else if (_inputValidator.validateName(
-                                  _garageControoler.text) !=
-                                  'success' &&
-                                  _garageControoler.text.isNotEmpty  && widget.userType == "Mechanic" ) {
-                                Fluttertoast.showToast(
-                                    msg: "Invalid Garage Name",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 1,
@@ -723,19 +702,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   );
                                 }
 
-                                else if (
-                                    _garageControoler.text.isEmpty  && widget.userType == "Mechanic" ) {
-                                  Fluttertoast.showToast(
-                                      msg: "Enter Garage Name",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.black,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0
-                                  );
-                                }
-
 
                                 else if(_emailControoler.text.isEmpty)
                                 {
@@ -787,19 +753,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       fontSize: 16.0
                                   );
                                 }
-
-                                else if ( result == null ) {
-                                  Fluttertoast.showToast(
-                                      msg: "Choose garage location on map",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.black,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0
-                                  );
-                                }
-
                                 else if (
                                 _addressControoler.text.isEmpty ) {
                                   Fluttertoast.showToast(
@@ -812,9 +765,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       fontSize: 16.0
                                   );
                                 }
-
-
-
                                 else {
                                   setState(() {
                                     _isLoading = true;
@@ -876,8 +826,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             "phone": _phoneControoler.text,
                                             "garageName": _garageControoler.text,
                                             "userType": widget.userType.toString(),
-                                            "lat": result!.latLng!.latitude,
-                                            "long": result!.latLng!.longitude,
+                                            "lat": widget.userType == "Mechanic" ? result!.latLng!.latitude : 0,
+                                            "long": widget.userType == "Mechanic" ? result!.latLng!.longitude : 0,
                                             "address":_addressControoler.text.toString(),
 
                                           }).then((value) => print('success'));

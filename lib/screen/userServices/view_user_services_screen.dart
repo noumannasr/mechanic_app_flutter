@@ -1,16 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mechanic_app_fyp/constants.dart';
 import 'package:flutter_mechanic_app_fyp/screen/detail/service_detail_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewUserServicesScreen extends StatefulWidget {
   final String mechanicName;
   final String mechanicId;
-  const ViewUserServicesScreen({Key? key
-  ,
+  final String mechanicPhone;
+  const ViewUserServicesScreen({Key? key,
     required this.mechanicName,
+    required this.mechanicPhone,
     required this.mechanicId,
   }) : super(key: key);
 
@@ -39,10 +43,6 @@ class _ViewUserServicesScreenState extends State<ViewUserServicesScreen> {
         email = value.docs[0]['email'];
       });
     });
-
-
-
-
   }
 
   @override
@@ -95,10 +95,12 @@ class _ViewUserServicesScreenState extends State<ViewUserServicesScreen> {
                     DocumentSnapshot ds = snapshot.data!.docs[index];
                     return GestureDetector(
                       onTap: () {
+                        print(snapshot.data!.docs[index]["mechanicPhone"].toString() +  " mechanicPhone");
                         Navigator.push(
                           context,
                           PageRouteBuilder(
                             pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                              mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                               mechanicId: widget.mechanicId,
                               mechanicName: widget.mechanicName,
                               userEmail: email,
@@ -194,7 +196,6 @@ class _ViewUserServicesScreenState extends State<ViewUserServicesScreen> {
                                                           height: 1.3),
                                                     ),
                                                   ),
-
                                                   Container(
                                                     width: size.width*0.55,
                                                     // color: Colors.yellow,
@@ -214,22 +215,63 @@ class _ViewUserServicesScreenState extends State<ViewUserServicesScreen> {
                                                       maxLines: 2,
                                                     ),
                                                   ),
-
                                                   Container(
                                                     // color: Colors.yellow,
                                                     alignment: Alignment.topLeft,
-                                                    child:  Text(
-                                                      "OMR " + snapshot
-                                                          .data!
-                                                          .docs[index]
-                                                      ["servicePrice"]
-                                                          .toString() ,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight.bold,
-                                                          height: 1.3),
+                                                    child:  Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          "OMR " + snapshot
+                                                              .data!
+                                                              .docs[index]
+                                                          ["servicePrice"]
+                                                              .toString() ,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14,
+                                                              fontWeight: FontWeight.bold,
+                                                              height: 1.3),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () async {
+                                                            // https://wa.me/+923314257676
+                                                            // whatsapp://send?phone=+923314257676
+                                                            try{
+
+                                                              // if (await canLaunch('whatsapp://send?phone=+923426202434')) {
+                                                              //   await launch('whatsapp://send?phone=+923426202434');
+                                                              // }
+                                                              //https://api.whatsapp.com/send?phone=+923426202434
+                                                              if (await canLaunch('whatsapp://send?phone=${widget.mechanicPhone}')) {
+                                                                await launch('whatsapp://send?phone=${widget.mechanicPhone}');
+                                                              }
+                                                              else {
+
+                                                                Fluttertoast.showToast(
+                                                                    msg: 'Sorry could not launch',
+                                                                    toastLength: Toast.LENGTH_LONG,
+                                                                    gravity: ToastGravity.BOTTOM,
+                                                                    timeInSecForIosWeb: 1,
+                                                                    backgroundColor: Colors.blueGrey,
+                                                                    textColor: Colors.white);
+
+                                                              }
+
+                                                            } catch (e) {
+                                                              print(e.toString()+ ' This is e');
+                                                            }
+
+
+                                                          },
+                                                          child: Image.asset('assets/images/whatsapp.png',
+                                                          width: 40,
+                                                          fit: BoxFit.scaleDown,
+                                                          height: 40,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],

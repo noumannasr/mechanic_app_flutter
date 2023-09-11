@@ -8,33 +8,30 @@ import 'package:flutter_mechanic_app_fyp/screen/auth/login/login_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AddMechanicalServiceScreen extends StatefulWidget {
+class AddEmployeeScreen extends StatefulWidget {
   final String name;
-  final String descrition;
-  final String price;
+  final String email;
+  final String phone;
   final String docId;
   final String status;
-  const AddMechanicalServiceScreen({Key? key,
+  const AddEmployeeScreen({Key? key,
     required this.name,
-    required this.descrition,
-    required this.price,
+    required this.email,
+    required this.phone,
     required this.docId,
     required this.status,
 
   }) : super(key: key);
 
   @override
-  _AddMechanicalServiceScreenState createState() => _AddMechanicalServiceScreenState();
+  _AddEmployeeScreenState createState() => _AddEmployeeScreenState();
 }
 
-class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen> {
+class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   final TextEditingController _titleControoler = TextEditingController();
-  final TextEditingController _descriptionControoler = TextEditingController();
-  final TextEditingController _priceControoler = TextEditingController();
-  final TextEditingController _passwordControoler = TextEditingController();
-  final TextEditingController _confirmPasswordControoler = TextEditingController();
-  final TextEditingController _firstNameControoler = TextEditingController();
-  final TextEditingController _addressControoler = TextEditingController();
+  final TextEditingController _emailControoler = TextEditingController();
+  final TextEditingController _phoneControoler = TextEditingController();
+
 
   MethodsHandler _methodsHandler = MethodsHandler();
   InputValidator _inputValidator = InputValidator();
@@ -70,8 +67,8 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
     if(widget.status == 'update') {
       setState(() {
         _titleControoler.text = widget.name;
-        _descriptionControoler.text = widget.descrition;
-        _priceControoler.text = widget.price;
+        _emailControoler.text = widget.email;
+        _phoneControoler.text = widget.phone;
       });
     }
     getData();
@@ -130,7 +127,7 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                           color:primaryColor,
                           height:140,
                           alignment: Alignment.center,
-                          child:            Text('Add Service', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),textAlign: TextAlign.center),
+                          child:            Text('Add Employee', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),textAlign: TextAlign.center),
 
                         ),
                       ),
@@ -199,7 +196,7 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           fillColor: Colors.grey,
-                          hintText:  "Service Name",
+                          hintText:  "Employee Name",
 
                           //make hint text
                           hintStyle: TextStyle(
@@ -214,13 +211,13 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                     SizedBox(
                       height: size.height*0.02,
                     ),
-                Container(
+                    Container(
                       decoration: BoxDecoration(color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),
                       margin: EdgeInsets.only(left: 16,right: 16,bottom: 0),
                       child: TextFormField(
-                        controller: _descriptionControoler,
-                        keyboardType: TextInputType.name,
+                        controller: _emailControoler,
+                        keyboardType: TextInputType.emailAddress,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.black,
@@ -249,7 +246,7 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           fillColor: Colors.grey,
-                          hintText: "Service Description",
+                          hintText: "Employee Email",
 
                           //make hint text
                           hintStyle: TextStyle(
@@ -269,8 +266,8 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                           borderRadius: BorderRadius.circular(30)),
                       margin: EdgeInsets.only(left: 16,right: 16,bottom: 0),
                       child: TextFormField(
-                        controller: _priceControoler,
-                        keyboardType: TextInputType.number,
+                        controller: _phoneControoler,
+                        keyboardType: TextInputType.phone,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.black,
@@ -299,7 +296,7 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           fillColor: Colors.grey,
-                          hintText: "Service Charges",
+                          hintText: "Employee Phone",
 
                           //make hint text
                           hintStyle: TextStyle(
@@ -365,10 +362,25 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                             onPressed: () async {
 
 
+                              if (_inputValidator.validateEmail(
+                                  _emailControoler.text) !=
+                                  'success' &&
+                                  _emailControoler.text.isNotEmpty) {
+                                Fluttertoast.showToast(
+                                    msg: "Wrong email address",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.black,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
+                              } else {
+
                                 if(_titleControoler.text.isEmpty)
                                 {
                                   Fluttertoast.showToast(
-                                      msg: "Service Name is required",
+                                      msg: "Employee Name is required",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.BOTTOM,
                                       timeInSecForIosWeb: 1,
@@ -379,9 +391,9 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                                 }
 
                                 else if (
-                                _descriptionControoler.text.isEmpty  ) {
+                                _emailControoler.text.isEmpty  ) {
                                   Fluttertoast.showToast(
-                                      msg: "Enter Service Description",
+                                      msg: "Email address is required",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.BOTTOM,
                                       timeInSecForIosWeb: 1,
@@ -400,8 +412,8 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                                   });
 
                                   print(_titleControoler.text.toString());
-                                  print( _descriptionControoler.text.toString());
-                                  print( _passwordControoler.text.toString());
+                                  print( _emailControoler.text.toString());
+                                  print( _phoneControoler.text.toString());
                                   //createAccount();
                                   //_methodsHandler.createAccount(name: _controllerClinic.text, email: _controller.text, password: _controllerPass.text, context: context);
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -412,16 +424,16 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
 
 
                                       FirebaseFirestore.instance
-                                          .collection("Services")
+                                          .collection("Employee")
                                           .doc(widget.docId)
                                           .set({
                                         "mechanicName": name.toString(),
                                         "mechanicPhone": phone.toString(),
                                         "garageName": garageName.toString(),
                                         "mechanicId": uid,
-                                        "servicePrice": _priceControoler.text,
-                                        "serviceName": _titleControoler.text,
-                                        "serviceDescription": _descriptionControoler.text,
+                                        "employeePhone": _phoneControoler.text,
+                                        "employeeName": _titleControoler.text,
+                                        "employeeEmail": _emailControoler.text,
                                         "address": address.toString(),
 
                                       }).then((value) => print('success'));
@@ -432,25 +444,24 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                                       Navigator.of(context).pop();
 
                                       Fluttertoast.showToast(
-                                        msg: "Service updated successfully",
+                                        msg: "Employee updated successfully",
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.BOTTOM,
                                         timeInSecForIosWeb: 4,
                                       );
 
                                     } else {
-
-
                                       FirebaseFirestore.instance
-                                          .collection("Services")
+                                          .collection("Employee")
                                           .doc()
                                           .set({
                                         "mechanicName": name.toString(),
-                                        "garageName": _passwordControoler.text.trim(),
+                                        "mechanicPhone": phone.toString(),
+                                        "garageName": garageName.toString(),
                                         "mechanicId": uid,
-                                        "servicePrice": _priceControoler.text,
-                                        "serviceName": _titleControoler.text,
-                                        "serviceDescription": _descriptionControoler.text,
+                                        "employeePhone": _phoneControoler.text,
+                                        "employeeName": _titleControoler.text,
+                                        "employeeEmail": _emailControoler.text,
                                         "address": address.toString(),
 
                                       }).then((value) => print('success'));
@@ -461,7 +472,7 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
                                       Navigator.of(context).pop();
 
                                       Fluttertoast.showToast(
-                                        msg: "Service added successfully",
+                                        msg: "Employee added successfully",
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.BOTTOM,
                                         timeInSecForIosWeb: 4,
@@ -484,9 +495,14 @@ class _AddMechanicalServiceScreenState extends State<AddMechanicalServiceScreen>
 
                                 }
 
+                              }
+
+
+
+
                             }, child: Text(
-                            widget.status == 'update' ? 'Update Service' :
-                            'Add Service', style: buttonStyle)),
+                            widget.status == 'update' ? 'Update Employee' :
+                            'Add Employee', style: buttonStyle)),
                       ),
                     ),
                     SizedBox(

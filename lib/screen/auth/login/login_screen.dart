@@ -4,10 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_mechanic_app_fyp/model/firebase_auth.dart';
 import 'package:flutter_mechanic_app_fyp/model/input_validator.dart';
 import 'package:flutter_mechanic_app_fyp/screen/admin/adminHomeScreen/admin_home_screen.dart';
-//import 'package:flutter_mechanic_app_fyp/screen/admin/adminHomeScreen/admin_home_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/auth/signUp/sign_up_screen.dart';
-// import 'package:flutter_mechanic_app_fyp/screen/bottomNavBar/app_bottom_nav_bar_screen.dart';
-// import 'package:flutter_mechanic_app_fyp/screen/doctor/doctorHome/doctor_home_screen.dart';
 import 'package:flutter_mechanic_app_fyp/screen/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -317,28 +314,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           onPressed: () async {
-
-                            // if(widget.userType == 'Mechanic') {
-                            //   Navigator.pushReplacement(
-                            //     context,
-                            //     PageRouteBuilder(
-                            //       pageBuilder: (c, a1, a2) =>
-                            //           MechanicHomeScreen(),
-                            //       transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                            //       transitionDuration: Duration(milliseconds: 100),
-                            //     ),
-                            //   );
-                            // } else {
-                            //   Navigator.pushReplacement(
-                            //     context,
-                            //     PageRouteBuilder(
-                            //       pageBuilder: (c, a1, a2) =>
-                            //           HomeScreen(),
-                            //       transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                            //       transitionDuration: Duration(milliseconds: 100),
-                            //     ),
-                            //   );
-                            // }
 
 
 

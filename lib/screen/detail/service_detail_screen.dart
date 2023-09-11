@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_mechanic_app_fyp/constants.dart';
 import 'package:flutter_mechanic_app_fyp/model/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum PaymentType { Credit_Debit, ConDelivery }
 
@@ -25,10 +26,12 @@ class ServiceDetailScreen extends StatefulWidget {
   final String address;
   final String status;
   final String payment;
+  final String mechanicPhone;
 
   const ServiceDetailScreen({Key? key,
     required this.mechanicName,
     required this.mechanicId,
+    required this.mechanicPhone,
     required this.serviceName,
     required this.servicePrice,
     required this.serviceDescription,
@@ -56,7 +59,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   String isCreated = '',  endTime = '' ;
   DateTime? _chosenDateTime;
   int y=0;
-  String? renterEmail = '', renterName = '', renterUid = '';
+  String? renterEmail = '', renterName = '', renterUid = '',userType = '';
 
   bool _isLoading = false;
 
@@ -73,6 +76,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     //      _cardCVCControler.text = widget.cardCVC.toString();
     //    });
     //  }
+    getUser();
     setState(() {
       y=0;
       renterName = '';
@@ -83,6 +87,19 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     });
     getRenter();
     super.initState();
+  }
+
+  getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      //userType = prefs.getString('userType')!;
+      userType = prefs.getString('userType')!;
+    });
+    print(userType.toString() + '  userType here');
+    print(widget.mechanicPhone.toString() + '  userType here');
+
+
   }
 
   getRenter() async {
@@ -151,6 +168,57 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                       ),
                     ],
                   ),
+                  userType != 'Mechanic' ?
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Call ',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          // https://wa.me/+923314257676
+                          // whatsapp://send?phone=+923314257676
+                          try{
+
+                            // if (await canLaunch('whatsapp://send?phone=+923426202434')) {
+                            //   await launch('whatsapp://send?phone=+923426202434');
+                            // }
+                            //https://api.whatsapp.com/send?phone=+923426202434
+                            if (await canLaunch('whatsapp://send?phone=${widget.mechanicPhone}')) {
+                              await launch('whatsapp://send?phone=${widget.mechanicPhone}');
+                            }
+                            else {
+
+                              Fluttertoast.showToast(
+                                  msg: 'Sorry could not launch',
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.blueGrey,
+                                  textColor: Colors.white);
+
+                            }
+
+                          } catch (e) {
+                            print(e.toString()+ ' This is e');
+                          }
+
+
+                        },
+                        child: Image.asset('assets/images/whatsapp.png',
+                          width: 40,
+                          fit: BoxFit.scaleDown,
+                          height: 40,
+                        ),
+                      ),
+
+                    ],
+                  ) : Container(),
 
                 ],
               ),
@@ -889,6 +957,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                 "ServicePrice": widget.servicePrice.toString(),
                                 "ServiceDescription": widget.serviceDescription.toString(),
                                 "mechanicName": widget.mechanicName.toString(),
+                                "mechanicPhone": widget.mechanicPhone.toString(),
                                 "mechanicId": widget.mechanicId.toString(),
                                 "garageName": widget.garageName.toString(),
                                 "address": widget.address.toString(),
@@ -949,6 +1018,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                               "ServicePrice": widget.servicePrice.toString(),
                               "ServiceDescription": widget.serviceDescription.toString(),
                               "mechanicName": widget.mechanicName.toString(),
+                              "mechanicPhone": widget.mechanicPhone.toString(),
                               "mechanicId": widget.mechanicId.toString(),
                               "garageName": widget.garageName.toString(),
                               "address": widget.address.toString(),

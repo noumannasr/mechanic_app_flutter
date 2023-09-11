@@ -81,6 +81,7 @@ class _ServiceRequestScreenState extends State<ServiceRequestScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         userEmail: snapshot.data!.docs[index]["userEmail"].toString(),
                                         userName: snapshot.data!.docs[index]["userName"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
@@ -410,6 +411,7 @@ class _ServiceRequestScreenState extends State<ServiceRequestScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         userEmail: snapshot.data!.docs[index]["userEmail"].toString(),
                                         userName: snapshot.data!.docs[index]["userName"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
@@ -621,6 +623,7 @@ class _ServiceRequestScreenState extends State<ServiceRequestScreen> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (c, a1, a2) => ServiceDetailScreen(
+                                        mechanicPhone: snapshot.data!.docs[index]["mechanicPhone"].toString(),
                                         userEmail: snapshot.data!.docs[index]["userEmail"].toString(),
                                         userName: snapshot.data!.docs[index]["userName"].toString(),
                                         mechanicId: snapshot.data!.docs[index]["mechanicId"].toString(),
